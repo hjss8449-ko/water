@@ -8,44 +8,42 @@
   <style>
     :root {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: #f3f4f6;
       color: #111827;
-      background-color: #f5f5f5;
     }
 
     body {
       margin: 0;
-      background-color: #f5f5f5;
     }
 
     .wrapper {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 16px;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 16px 48px;
     }
 
     .title {
       text-align: center;
-      margin-bottom: 24px;
-      font-size: 22px;
+      font-size: 26px;
       font-weight: 700;
+      margin-bottom: 28px;
+      color: #111827;
     }
 
     .calc-box {
+      background-color: white;
+      border-radius: 36px;
+      padding: 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      padding: 24px;
-      border-radius: 40px;
-      background-color: #fafafa;
-      border: 1px solid #e5e7eb;
+      gap: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
     }
 
     .inputs {
       flex: 1;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: 24px;
     }
 
@@ -54,9 +52,9 @@
     }
 
     .label {
-      font-size: 13px;
-      color: #6b7280;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #374151;
     }
 
     .field-row {
@@ -66,60 +64,67 @@
     }
 
     input {
-      flex: 1;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid #d1d5db;
+      width: 100%;
+      padding: 10px 14px;
       font-size: 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
       text-align: right;
     }
 
     input:focus {
-      outline: none;
       border-color: #2563eb;
+      outline: none;
       box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
-    }
-
-    .unit {
-      font-size: 14px;
-      color: #4b5563;
     }
 
     .divider {
       width: 1px;
-      height: 48px;
       background-color: #e5e7eb;
+      margin: 4px 0;
     }
 
     .result-circle {
-      width: 140px;
-      height: 140px;
+      width: 180px;
+      height: 180px;
       border-radius: 999px;
       background-color: #4b5563;
-      color: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      color: white;
+      gap: 12px;
+    }
+
+    .icon svg {
+      width: 44px;
+      height: 44px;
+      fill: white;
+      opacity: 0.9;
     }
 
     .result-main {
       display: flex;
       align-items: baseline;
-      gap: 4px;
+      gap: 6px;
     }
 
-    #resultPrice {
-      font-size: 26px;
+    .result-value {
+      font-size: 28px;
       font-weight: 700;
     }
 
-    .desc {
-      margin-top: 24px;
+    .unit {
       font-size: 14px;
-      color: #4b5563;
+      color: #e5e7eb;
+    }
+
+    .desc {
       text-align: center;
+      margin-top: 20px;
+      font-size: 15px;
+      color: #374151;
     }
 
     .highlight {
@@ -127,15 +132,16 @@
       font-weight: 700;
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
       .calc-box {
         flex-direction: column;
-        align-items: stretch;
-        border-radius: 24px;
+        padding: 24px;
+        border-radius: 20px;
       }
 
       .result-circle {
-        align-self: center;
+        width: 150px;
+        height: 150px;
       }
     }
   </style>
@@ -150,8 +156,8 @@
         <div class="field">
           <div class="label">원물 상태 가격(원)</div>
           <div class="field-row">
-            <input id="price" type="number" value="500" />
-            <span class="unit">원</span>
+            <input id="price" type="number" placeholder="예: 500" />
+            <span>원</span>
           </div>
         </div>
 
@@ -160,65 +166,62 @@
         <div class="field">
           <div class="label">수분 함량(%)</div>
           <div class="field-row">
-            <input id="moisture" type="number" value="20" />
-            <span class="unit">%</span>
+            <input id="moisture" type="number" placeholder="예: 20" />
+            <span>%</span>
           </div>
         </div>
       </div>
 
       <div class="result-circle">
+        <div class="icon">
+          <!-- SVG 아이콘 (로컬에서도 문제 없음) -->
+          <svg viewBox="0 0 24 24">
+            <path d="M3 3h18v18H3V3zm5 14h2v-4H8v4zm4 0h2V7h-2v10zm4 0h2v-7h-2v7z"/>
+          </svg>
+        </div>
         <div class="result-main">
-          <span id="resultPrice">550</span>
+          <span id="resultPrice" class="result-value">-</span>
           <span class="unit">원/kg</span>
         </div>
       </div>
     </div>
 
     <p class="desc" id="descText">
-      입력하신 사료를 수분 함량 <strong>12%</strong> 기준으로 보정 시 원료사료의 가격은
-      <strong class="highlight">550원</strong>입니다.
+      원물 가격과 수분 함량을 올바르게 입력해 주세요. (수분은 0~99%)
     </p>
   </div>
 
   <script>
-    // 12% 기준 보정 단가 계산
     function calcPriceAt12(price, moisture) {
-      const target = 12;
-      const numerator = 100 - target; // 88
+      const numerator = 88; // 100 - 12
       const denominator = 100 - moisture;
       if (denominator <= 0) return NaN;
       return price * (numerator / denominator);
     }
 
     function update() {
-      const priceInput = document.getElementById("price");
-      const moistureInput = document.getElementById("moisture");
-      const resultSpan = document.getElementById("resultPrice");
-      const descText = document.getElementById("descText");
+      const price = parseFloat(document.getElementById("price").value);
+      const moisture = parseFloat(document.getElementById("moisture").value);
 
-      const price = parseFloat(priceInput.value);
-      const moisture = parseFloat(moistureInput.value);
+      const priceEl = document.getElementById("resultPrice");
+      const descEl = document.getElementById("descText");
 
-      if (isNaN(price) || isNaN(moisture) || moisture >= 100 || moisture < 0) {
-        resultSpan.textContent = "-";
-        descText.innerHTML =
-          '원물 가격과 수분 함량을 올바르게 입력해 주세요. (수분은 0~99%)';
+      if (isNaN(price) || isNaN(moisture) || moisture < 0 || moisture >= 100) {
+        priceEl.textContent = "-";
+        descEl.textContent = "원물 가격과 수분 함량을 올바르게 입력해 주세요. (수분은 0~99%)";
         return;
       }
 
-      const p12 = calcPriceAt12(price, moisture);
-      const rounded = Math.round(p12 * 100) / 100;
+      const result = calcPriceAt12(price, moisture);
+      const rounded = Math.round(result * 100) / 100;
 
-      resultSpan.textContent = rounded.toString();
-      descText.innerHTML =
-        `입력하신 사료를 수분 함량 <strong>12%</strong> 기준으로 보정 시 원료사료의 가격은 <strong class="highlight">${rounded}원</strong>입니다.`;
+      priceEl.textContent = rounded;
+      descEl.innerHTML =
+        `수분 12% 기준 가격은 <span class="highlight">${rounded}원/kg</span> 입니다.`;
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("price").addEventListener("input", update);
-      document.getElementById("moisture").addEventListener("input", update);
-      update(); // 초기 값(500원, 20%)으로 한번 계산
-    });
+    document.getElementById("price").addEventListener("input", update);
+    document.getElementById("moisture").addEventListener("input", update);
   </script>
 </body>
 </html>
