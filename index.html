@@ -1,0 +1,38 @@
+<div class="wrapper">
+  <h2 class="title"> 한중에스에스 수분 보정 가격 계산하기</h2>
+
+  <div class="calc-box">
+    <div class="inputs">
+      <div class="field">
+        <div class="label">원물 상태 가격(원)</div>
+        <div class="field-row">
+          <input id="price" type="number" value=" " />
+          <span class="unit">원</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="field">
+        <div class="label">수분 함량(%)</div>
+        <div class="field-row">
+          <input id="moisture" type="number" value=" " />
+          <span class="unit">%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-circle">
+      <div class="icon">📊</div>
+      <div class="result-main">
+        <span id="resultPrice"> </span>
+        <span class="unit">원/kg</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="desc" id="descText">
+    입력하신 사료를 수분 함량 <strong>12%</strong> 기준으로 보정 시 원료사료의 가격은
+    <strong class="highlight"> 원</strong>입니다.
+  </p>
+</div>
